@@ -28,19 +28,22 @@ pipeline {
             }
         }
 
-        stage('Deploy to EKS') {
-            steps {
-                sh '''
-                echo "⚙️ Updating kubeconfig for EKS"
-                aws eks update-kubeconfig --region ap-south-1 --name my-eks-cluster
-
-                echo "🚀 Deploying to Kubernetes"
-                kubectl apply -f k8s/deployment.yaml
-                kubectl apply -f k8s/service.yaml
-                '''
-            }
+     stage('Deploy to EKS') {
+    steps {
+        withCredentials([[
+            $class: 'AmazonWebServicesCredentialsBinding',
+            credentialsId: 'aws-creds'
+        ]]) {
+            sh '''
+            echo ⚙️ Updating kubeconfig for EKS
+            aws eks update-kubeconfig --region ap-south-1 --name my-eks-cluster
+            kubectl apply -f k8s/deployment.yaml
+            kubectl apply -f k8s/service.yaml
+            '''
         }
     }
+}
+
     post {
         success {
             echo '✅ Deployment successful!'
