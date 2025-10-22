@@ -44,8 +44,8 @@ pipeline {
                     aws eks update-kubeconfig --region ap-south-1 --name myappcluster
 
                     echo "?? Deploying application to EKS..."
-                    kubectl apply -f k8s/deployment.yaml
-                    kubectl apply -f k8s/service.yaml
+                    kubectl apply -f deployment.yaml
+                    kubectl apply -f service.yaml
 
                     echo "? Deployment applied successfully."
                     '''
