@@ -17,5 +17,6 @@ spec:
       - name: trend-app
         image: saidoc540/trend-app:latest
         ports:
-        - containerPort: 3000
+        - containerPort: 80
+
 
