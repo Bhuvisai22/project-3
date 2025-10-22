@@ -41,7 +41,7 @@ pipeline {
                 ]]) {
                     sh '''
                     echo "?? Updating kubeconfig for EKS"
-                    aws eks update-kubeconfig --region ap-south-1 --name my-eks-cluster
+                    aws eks update-kubeconfig --region ap-south-1 --name myappcluster
 
                     echo "?? Deploying application to EKS..."
                     kubectl apply -f k8s/deployment.yaml
