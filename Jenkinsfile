@@ -33,34 +33,4 @@ pipeline {
             }
         }
 
-    //    stage('Deploy to EKS') {
-            steps {
-                withCredentials([[
-                    $class: 'AmazonWebServicesCredentialsBinding',
-                    credentialsId: 'aws-creds'
-                ]]) {
-                    sh '''
-                    echo "?? Updating kubeconfig for EKS"
-                    aws eks update-kubeconfig --region ap-south-1 --name myappcluster
-
-                    echo "?? Deploying application to EKS..."
-                    kubectl apply -f deployment.yaml
-                    kubectl apply -f service.yaml
-
-                    echo "? Deployment applied successfully."
-                    '''
-                }
-            }
-        }
-    }
-
-    post {
-        success {
-            echo '? Deployment successful!'
-        }
-        failure {
-            echo '? Deployment failed. Check logs.'
-        }
-    }
-}
-//
+    
