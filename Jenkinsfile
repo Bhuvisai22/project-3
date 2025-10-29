@@ -33,7 +33,7 @@ pipeline {
             }
         }
 
-        stage('Deploy to EKS') {
+    //    stage('Deploy to EKS') {
             steps {
                 withCredentials([[
                     $class: 'AmazonWebServicesCredentialsBinding',
@@ -63,3 +63,4 @@ pipeline {
         }
     }
 }
+//
